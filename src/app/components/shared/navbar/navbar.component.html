@@ -1,0 +1,37 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div><a href="#/login" class="navbar-brand">Angular</a></div>
+    <ul class="navbar-nav">
+      <li>
+        <a class="nav-link" href="#/projects/{{logginId}}">Projects</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li>
+        <a class="nav-link" href="#/user">Users</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-collapse justify-content-end">
+      <li>
+        <a href="#/login" *ngIf="!jwtService.loggedIn()" class="nav-link"> Login </a>
+      </li>
+      <li>
+        
+        <a *ngIf="jwtService.loggedIn()" class="nav-link" (click)="logout()" href="#/logout"> Logout </a>
+      </li>
+    </ul>
+    <ul>
+      <div style="width: 30;padding: 0%;margin: 0%">
+          <img id="Myimg" width="100" class="circle"
+          style="padding-top: 15px" 
+          src="http://localhost:8080/attachments/{{logginUser.src}}" 
+          alt="">
+      </div>
+           
+        
+    </ul>
+
+  </nav>
+   
+</header> 
+

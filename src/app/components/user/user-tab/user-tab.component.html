@@ -1,0 +1,31 @@
+<br><br>
+<div class="container">
+  <div class="card" style="width:300px">
+    <img class="card-img-top"  src="http://localhost:8080/pics/{{url}}" alt="Card image"  width ="50">
+    <div class="card-body">
+      <h4 class="card-title">{{userInfo.name}}</h4>
+      <p class="card-text">{{userInfo.userName}}</p>
+      <p class="card-text">{{userInfo.dateOfBirth}}</p>
+      <p class="card-text">{{userInfo.type}}</p>
+      <p></p>
+     
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" (click) = "showUserProjects()">Projects</button>
+        <button type="button" class="btn btn-secondary" (click) = "showUsercard()">Tasks</button>
+        
+
+      </div>
+      <br><br>
+      <ul class="list-group" *ngFor="let x of userCardProjects" [hidden]="!enableProjects">
+        <li class="list-group-item " >{{x.name}}</li>
+      
+      </ul>
+      <ul class="list-group"  *ngFor="let t of userCardTasks" [hidden]="!enableTasks">
+        <li class="list-group-item " >{{t.name}}</li>
+      
+      </ul>
+
+    </div>
+  </div>
+  <br>
+  

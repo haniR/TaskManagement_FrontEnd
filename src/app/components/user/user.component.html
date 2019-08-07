@@ -1,0 +1,147 @@
+<br>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Type</th>
+           
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of users" (click)="checkRow(x)" class="{{x.checked ? 'table-primary' : ''}}">
+            <td scope="row"> {{x.id}}</td>
+            <td scope="row"><a  href="#/user_tab/{{x.id}}">{{x.name}}</a></td>
+            <td scope="row">{{x.userName}}</td>
+            <td scope="row"> {{x.dateOfBirth}}</td>
+            <td scope="row"> {{x.type}}</td>
+        
+        </tr>
+    </tbody>
+</table>
+
+<div [hidden]="!admin" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <button type="button" class="btn btn-secondary" (click)="openModal(add)" value="add">Add</button>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <button type="button" class="btn btn-secondary" value="delete" (click)="delete()"
+             [disabled]="!enable">Delete</button>
+    </div>
+    <div class="btn-group" role="group" aria-label="Third group">
+        <button type="button" class="btn btn-secondary" value="edit" (click)="openModal(edit)"
+            [disabled]="!enable">Edit</button>
+    </div>
+</div>
+
+
+<!-- add -->
+<ng-template #add>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body">
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="text" class="form-control" [(ngModel)]='newUser.name'
+                        [ngModelOptions]="{standalone: true}" placeholder="Name" id="name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" [(ngModel)]='newUser.userName'
+                        [ngModelOptions]="{standalone: true}" placeholder="User Name" id="userName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Password</label>
+                    <input type="password" class="form-control" [(ngModel)]='newUser.password'
+                        [ngModelOptions]="{standalone: true}" placeholder="Password" id="password">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Date of Birth</label>
+                    <input type="datetime-local" class="form-control" [(ngModel)]='newUser.dateOfBirth'
+                        [ngModelOptions]="{standalone: true}" placeholder="dateOfBirth" id="dateOfBirth">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Type</label>
+                    <select name="type" id = "type"  class="form-control" [(ngModel)]='newUser.type'
+                    [ngModelOptions]="{standalone: true}">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                      </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Src</label>
+                    <input type="file"  class="form-control"  placeholder="Type" id="src" (change)="onChange($event)">
+                </div>
+                
+            </div>
+
+            <button type="button" class="btn btn-primary" id="save" (click)="save()"
+                (click)="modalRef.hide()">Save</button>
+            <button value="cancel" class="btn btn-primary" id="cancel" (click)="cancel()"
+                (click)="modalRef.hide()">cancel</button>
+        </div>
+    </form>
+</ng-template>
+<!-- Edit-->
+<ng-template #edit>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body">
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="text" class="form-control" [(ngModel)]='selected.name'
+                        [ngModelOptions]="{standalone: true}" placeholder="Name" id="name">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" [(ngModel)]='selected.userName'
+                        [ngModelOptions]="{standalone: true}" placeholder="Price" id="userName">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Date of Birth</label>
+                    <input type="datetime-local" class="form-control" [(ngModel)]='selected.dateOfBirth'
+                        [ngModelOptions]="{standalone: true}" placeholder="yy/mm/dd" id="dateOfBirth">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Type</label>
+                    <select name="type" id = "type"  class="form-control" [(ngModel)]='selected.type'
+                    [ngModelOptions]="{standalone: true}">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                      </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Src</label>
+                    <input type="file"  class="form-control" [(ngModel)]='selected.src'
+                        [ngModelOptions]="{standalone: true}" placeholder="Type" id="src" (change)="onChange($event)">
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="edit" (click)="editt()"
+                (click)="modalRef.hide()">Save</button>
+            <button value="cancel" class="btn btn-primary" id="cancel" (click)="cancel()"
+                (click)="modalRef.hide()">cancel</button>
+        </div>
+    </form>
+</ng-template>

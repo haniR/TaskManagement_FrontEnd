@@ -1,0 +1,113 @@
+<div class="alert alert-primary" role="alert">
+    Task Information </div>
+<div class="container">
+    <label> Task Name</label>
+    <input type="text" class="form-control" [(ngModel)]="thisTask.name" readonly />
+    <label>Type</label>
+    <input type="text" class="form-control" [(ngModel)]="thisTask.type" readonly />
+
+
+    <label>Status</label>
+    <input type="text" class="form-control" [(ngModel)]="thisTask.status" readonly />
+
+
+    <label>Priority</label>
+    <input type="text" class="form-control" [(ngModel)]="thisTask.priority" readonly />
+
+
+    <label>Description</label><input type="text" class="form-control" [(ngModel)]="thisTask.description" readonly />
+
+    <label>Assigne</label><input type="text" class="form-control" [(ngModel)]="thisTask.user_name" readonly />
+    <button class="btn btn-primary" (click)="openModal2(template2, thisTask)">
+        Update
+    </button>
+    <br>
+</div>
+<!-- <div class="alert alert-secondary" role="alert">
+    Attachements </div> -->
+<h5 class="card-title" style="margin-top: 10px">Attachements </h5>
+<div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 30px">
+    <table class="table table-bordered table-striped mb-0">
+        <thead style="text-align: center">
+            <tr>
+                <th>name</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody style="text-align: center">
+            <tr *ngFor="let attach of attachemnt">
+                <td style="cursor: default"><a href="http://localhost:8080/attachments/{{attach.src}}"
+                        target="_blank">{{attach.src}}</a></td>
+                <td>
+                    <button class="btn btn-secondary" (click)="deleteAttachement(attach)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<button type="button" class="btn btn-primary" (click)="openModal(template)">
+    Add Attachement
+</button>
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Attachement</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <label>Browse : </label>
+        <br>
+        <input type="file" (change)='readAttachement($event)' style="width:  250px"><br>
+
+    </div>
+    <div class="model-footer">
+        <pre> <button type="submit" (click)="uploadtAttachements()" class="btn btn-success">Upload </button>   <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button></pre>
+    </div>
+</ng-template>
+<div class="alert alert-success" role="alert">
+    Comments </div>
+
+
+
+
+
+<ng-template #template2>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit Task</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <label>Name</label><input type="text" class="form-control" [(ngModel)]="editedTask.name" />
+        <label>Type</label><select class="form-control" [(ngModel)]="editedTask.type">
+            <option *ngFor="let type of types">{{type}}</option>
+        </select>
+        <label>Status</label><select class="form-control" [(ngModel)]="editedTask.status">
+            <option *ngFor="let status of statuses">{{status}}</option>
+        </select>
+
+        <label>Priority</label><select class="form-control" [(ngModel)]="editedTask.priority">
+            <option *ngFor="let priority of priorities">{{priority}}</option>
+        </select>
+
+        <label>Description</label><input type="text" class="form-control" [(ngModel)]="editedTask.description" />
+        <label>Assigne</label>
+        <!-- <pre class="card card-block card-header mb-3"> assigne</pre> -->
+        <!-- <input [(ngModel)]="editedTask.assigne" [typeahead]="usersProject" typeaheadOptionField="name"
+            class="form-control" (typeaheadOnSelect)="typeaheadOnSelect($event)" -->
+        
+
+        <select class="form-control" [(ngModel)]="editedTask.assigne">
+            <option *ngFor="let user of usersProject" value="{{user.id}}">{{user.name}}</option>
+        </select>
+        <!-- <input type="text" class="form-control" [(ngModel)]="editedTask.assigne" /> -->
+    </div>
+    <div class="model-footer">
+        <pre>  <button type="button" class="btn btn-primary" (click)=edit()>Save</button> <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button> <button type="button" class="btn btn-primary" (click)=delete()>Delete</button></pre>
+    </div>
+</ng-template>

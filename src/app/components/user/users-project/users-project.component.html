@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+
+<hr style="height:3px;border:none;color:#333;background-color:#333;">
+<h5 class="card-title" style="margin-top: 10px" *ngIf="userType == 'admin'">All Projects </h5>
+<h5 class="card-title" style="margin-top: 10px" *ngIf="userType == 'user'">Your Projects </h5>
+<div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 30px">
+  <table class="table table-bordered table-striped mb-0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>username</th>
+        <th>dateOfBirth</th>
+        <th>type</th>
+        <th >Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usersProject">
+        <th scope="row">{{ user.id }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.dateOfBirth }}</td>
+        <td>{{ user.type }}</td>
+        <!-- <td> -->
+          <!-- <button class="btn btn-primary" href="#/tasks/{{project.id}}">
+            Tasks
+          </button> -->
+          <!-- <button class="btn btn-secondary" (click)="openTasks(project.id)">
+            Users
+          </button> -->
+
+        <!-- </td> -->
+        <td >
+          <button class="btn btn-secondary" (click)="deleteModel(template3,user)">
+            Delete
+          </button>
+          <button class="btn btn-primary" (click)="openModal2(template2, user)">
+            Update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button type="button" class="btn btn-primary" (click)="openModal(template)" *ngIf="userType == 'admin'">
+  add
+</button>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add User</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label>Name</label><select class="form-control" [(ngModel)]="newUser.usersId">
+        <option *ngFor="let user of userExist" value={{user.id}}>{{user.name}}</option>
+    </select>
+  </div>
+  <div class="model-footer">
+    <pre>  <button type="button" class="btn btn-primary" (click)=add()>Add</button> <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button> </pre>
+  </div>
+</ng-template>
+<ng-template #template2>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit User</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label>Name</label><input type="text" class="form-control" [(ngModel)]="editedUser.name" />
+  </div>
+  <div class="model-footer">
+    <pre>  <button type="button" class="btn btn-primary" (click)=edit()>Save</button> <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button> <button type="button" class="btn btn-primary" (click)=delete()>Delete</button></pre>
+  </div>
+</ng-template>
+<ng-template #template3>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Delete User From Project</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label> Please Assigne Tasks To </label><select class="form-control" [(ngModel)]="deletedUser.to">
+      <option *ngFor="let user of usersRemainingFromDelete" value="{{user.id}}">{{user.name}}</option>
+    </select>
+  </div>
+  <div class="model-footer">
+    <pre>  <button type="button" class="btn btn-primary" (click)=deleteUserFromProject()>Delete</button> <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button> </pre>
+  </div>
+</ng-template>

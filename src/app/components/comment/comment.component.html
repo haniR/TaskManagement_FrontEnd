@@ -1,0 +1,19 @@
+<br><br>
+
+<div class="container">
+<div class="form-group green-border-focus">
+    <label for="exampleFormControlTextarea4">Comment</label>
+    <textarea class="form-control" id="textArea" rows="3"></textarea>
+</div>
+  
+<div  class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <button type="button" class="btn btn-secondary" (click)="addComment(textArea)" value="add">Add</button>
+    </div>
+   
+    <div class="btn-group" role="group" aria-label="Third group">
+        <button type="button" class="btn btn-secondary"(click)="editComment(textArea)" value="edit" 
+           >Edit</button>
+    </div>
+</div>
+</div>

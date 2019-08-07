@@ -1,0 +1,20 @@
+.countainer{
+    width: 20%;
+    margin-inline-start: 10px;
+    
+}
+.form-control{
+    width: 400px;
+}
+.green-border-focus .form-control:focus {
+  border: 1px solid #8bc34a;
+  box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+ }
+ button{
+    margin: 15px 15px 15px 15px;
+    padding: 10px 15px;
+   
+}
+    input{
+        margin: 2px 2px 2px 2px;
+    }   

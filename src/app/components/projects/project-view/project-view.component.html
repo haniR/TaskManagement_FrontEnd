@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-sm-4">
+      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend" title="Status">
+      </canvas>
+    </div>
+    <div class="col-sm-4">
+      <canvas baseChart [data]="pieChartData2" [labels]="pieChartLabels2" [chartType]="pieChartType2"
+        [options]="pieChartOptions2" [colors]="pieChartColors2" [legend]="pieChartLegend2" 
+        title="Type">
+      </canvas>
+    </div>
+    <div class="col-sm-4">
+      <canvas baseChart [data]="pieChartData3" [labels]="pieChartLabels3" [chartType]="pieChartType3"
+        [options]="pieChartOptions3" [colors]="pieChartColors3" [legend]="pieChartLegend3" title="Priority">
+      </canvas>
+    </div>
+  </div>

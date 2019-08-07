@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+<div class="card">
+  <div class="card-body" style="padding: 5px;">
+    <h3 class="card-title">
+      Projects
+    </h3>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="openModal(template)"
+      *ngIf="userType == 'admin'"
+    >
+      add
+    </button>
+    <div
+      class="table-wrapper-scroll-y my-custom-scrollbar"
+      style="margin-top: 30px"
+    >
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Admin</th>
+            <th>Tasks</th>
+            <th *ngIf="userType == 'admin'">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of userProject">
+            <th scope="row">{{ project.id }}</th>
+            <td>{{ project.name }}</td>
+            <td>{{ project.code }}</td>
+            <td>{{ project.adminName }}</td>
+            <td>
+              <a class="btn btn-primary" href="#/tasks/{{ project.id }}">
+                Tasks
+              </a>
+              <a class="btn btn-secondary" href="#/users/{{ project.id }}">
+                Users
+              </a>
+            </td>
+            <td *ngIf="userType == 'admin'">
+              <button
+                class="btn btn-secondary"
+                (click)="deleteProject(project)"
+              >
+                Delete
+              </button>
+              <button
+                class="btn btn-primary"
+                (click)="openModal2(template2, project)"
+              >
+                Update
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add User</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label>Name</label
+    ><input type="text" class="form-control" [(ngModel)]="newProject.name" />
+    <label>Code</label
+    ><input type="text" class="form-control" [(ngModel)]="newProject.code" />
+    <label>Admin</label>
+    <select class="form-control" [(ngModel)]="newProject.adminId">
+      <option *ngFor="let admin of admins" value="{{ admin.id }}">{{
+        admin.name
+      }}</option>
+    </select>
+    <!-- <input type="text" class="form-control" [(ngModel)]="newProject.adminId" /> -->
+  </div>
+  <div class="model-footer">
+    <pre>  <button type="button" class="btn btn-primary" (click)=add()>Add</button> <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button> </pre>
+  </div>
+</ng-template>
+<ng-template #template2>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit User</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label>Name</label
+    ><input type="text" class="form-control" [(ngModel)]="editedProject.name" />
+    <label>Code</label
+    ><input type="text" class="form-control" [(ngModel)]="editedProject.code" />
+    <label>Admin</label
+    ><select class="form-control" [(ngModel)]="editedProject.adminId">
+      <option *ngFor="let admin of admins" value="{{ admin.id }}">{{
+        admin.name
+      }}</option>
+    </select>
+  </div>
+  <div class="model-footer">
+    <pre>  <button type="button" class="btn btn-primary" (click)=edit()>Save</button> <button type="button" class="btn btn-primary" (click)=cancel()>Cancel</button> <button type="button" class="btn btn-primary" (click)=delete()>Delete</button></pre>
+  </div>
+</ng-template>
+<app-user-view></app-user-view>
+
+
